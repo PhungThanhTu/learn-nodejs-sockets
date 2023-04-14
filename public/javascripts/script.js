@@ -2,7 +2,7 @@
 const canvas = document.createElement('canvas');
 const context = canvas.getContext('2d');
 
-const socket = io('http://localhost:5555');
+const socket = io('/pong');
 let isReferee = false;
 
 let paddleIndex = 0;
@@ -212,6 +212,10 @@ function startGame() {
 
 // On Load
 loadGame();
+
+socket.on('disconnected', () => {
+  location.reload();
+})
 
 socket.on('connect', () => {
   console.log(`connected as ${socket.id}`)
